@@ -5,8 +5,9 @@ public class TestTerrain{
 		terrain.pointHaut();
 		//terrain.strates();
 		terrain.strates2();
+		terrain.ajoutArbres();
 		System.out.println(terrain.toString());
 		System.out.println(terrain.toString2());
-		
+		System.out.println(terrain.toString3());
 	}
 }

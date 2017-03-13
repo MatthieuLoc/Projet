@@ -6,34 +6,26 @@ public class Terrain{
 	private int y_haut;
 	
 	private int[][] terrain;
+	private int[][] environnement;
 	
 	public Terrain(int s, int alt){
 		size = s;
 		altitude = alt;
 		f = 2;
 		terrain = new int[size][size];
+		environnement = new int[size][size];
 	}
 	
 	public void init(){
 		for(int i=0; i<size; i++){
 			for(int j=0; j<size; j++){
 				terrain[i][j]= 0;
+				environnement[i][j]= 0;
 				//terrain[i][j]= (int)(Math.random()*10);
 			}
 		}
 	}
 	
-	public String toString(){
-		String s = "";
-		for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
-				s += terrain[i][j] + " ";
-			}
-			s += "\n";
-		}
-		
-		return s;
-	}
 	
 	
 	
@@ -56,6 +48,19 @@ public class Terrain{
 		}
 	}
 	
+	public String toString(){
+		String s = "";
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				s += terrain[i][j] + "	";
+			}
+			s += "\n";
+		}
+		
+		return s;
+	}
+	
+	
 	public String toString2(){
 		String s="";
 		for(int i=0; i<size; i++){
@@ -71,6 +76,23 @@ public class Terrain{
 		}
 		return s;
 	}
+	
+	public String toString3(){
+		String s="";
+		for(int i=0; i<size; i++){
+			for(int j=0; j<size; j++){
+				if(environnement[i][j]==0){
+					s += "- ";
+				}
+				if(environnement[i][j]!=0){
+					s += "* ";
+				}
+			}
+			s += "\n";
+		}
+		return s;
+	}
+	
 	
 	public void strates(){
 		int x1 = 2;
@@ -153,6 +175,24 @@ public class Terrain{
 		
 	}
 	
+	public void ajoutArbres(){
+		double probarbre = 0.4;
+	
+		for(int i=0; i < size; i++){
+			for(int j=0; j < size; j++){
+				if((terrain[i][j]<altitude-2)&&(Math.random()<probarbre)){
+					if(Math.random()<0.5){
+						environnement[i][j]=31;
+					}
+					else{
+						environnement[i][j]=30;
+					}
+					
+				}
+			}
+		}
+	}
+	
 	
 	int getSize(){
 		return size;
@@ -162,6 +202,12 @@ public class Terrain{
 	int[][] getTerrain(){
 		return terrain;
 	}
+	
+	int[][] getEnvironnement(){
+		return environnement;
+	}
+	
+	
 	
 	
 	
