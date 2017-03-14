@@ -25,9 +25,9 @@ public class Sprite extends JPanel {
 	
 	private int spriteLength = 16;
 	
-	private Terrain terrain;
+
 	
-	public Sprite(){
+	public Sprite(Terrain terrain){
 	
 		try{
 			herbe = ImageIO.read(new File("herbe.png"));
@@ -49,10 +49,10 @@ public class Sprite extends JPanel {
 	
 		frame = new JFrame("TERRAIN");
 		frame.add(this);
-		frame.setSize(1000,1000);
+		frame.setSize(800,500);
 		frame.setVisible(true);
 		
-		terrain = new Terrain(70,7);
+		terrain = new Terrain(80,50,9);
 		
 		terrain.init();
 		terrain.pointHaut();
@@ -67,8 +67,8 @@ public class Sprite extends JPanel {
 	{
 		Graphics2D g2 = (Graphics2D)g;
 		Graphics2D g3 = (Graphics2D)g;
-		for ( int i = 0 ; i < terrain.getSize() ; i++ )
-			for ( int j = 0 ; j < terrain.getSize() ; j++ )
+		for ( int i = 0 ; i < terrain.getWidth() ; i++ )
+			for ( int j = 0 ; j < terrain.getHeight() ; j++ )
 			{
 				if ( terrain.getTerrain()[i][j] < 10 ){
 					g2.drawImage(herbe,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
@@ -111,9 +111,8 @@ public class Sprite extends JPanel {
 			}
 	}
 
-	public static void main(String[] args) {
-		new Sprite();
-	}
+
+	
 }
 
 
