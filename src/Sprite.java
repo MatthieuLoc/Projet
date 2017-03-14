@@ -25,6 +25,7 @@ public class Sprite extends JPanel {
 	
 	private int spriteLength = 16;
 	private Terrain terrain;
+
 	
 
 	

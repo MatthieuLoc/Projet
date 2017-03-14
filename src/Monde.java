@@ -11,7 +11,7 @@ public class Monde {
 		Terrain terrain;
 		MoutonAgent[] moutons=new MoutonAgent[nmouton];
 		
-		terrain = new Terrain(80,50,9);
+		terrain = new Terrain(85,50,9);
 		
 		terrain.init();
 		terrain.pointHaut();

@@ -174,10 +174,10 @@ public class Terrain{
 				}
 			}
 			
-			x1+=2+(int)(Math.random()*5);
-			x2+=2+(int)(Math.random()*5);
-			y1+=2+(int)(Math.random()*6);
-			y2+=2+(int)(Math.random()*6);
+			x1+=2+(int)(Math.random()*9);
+			x2+=2+(int)(Math.random()*2);
+			y1+=2+(int)(Math.random()*5);
+			y2+=2+(int)(Math.random()*5);
 		}
 		
 	}
