@@ -25,9 +25,9 @@ public class Sprite extends JPanel {
 	
 	private int spriteLength = 16;
 	
-
+	final Terrain terrain;
 	
-	public Sprite(Terrain terrain){
+	public Sprite(){
 	
 		try{
 			herbe = ImageIO.read(new File("herbe.png"));
