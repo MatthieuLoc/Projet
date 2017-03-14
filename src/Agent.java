@@ -11,7 +11,7 @@ public abstract class Agent {
 
 
 
-	public Agent(Terrain terrain,int x, int y){
+	public Agent(int x, int y){
 		this.x=x;
 		this.y=y;
 		this.orientation=0;
@@ -22,23 +22,23 @@ public abstract class Agent {
 			
 	}
 
-	public void deplacementRandom(Terrain terrain){ //le deplacement random est commun aux moutons et aux loups
+	public void deplacementRandom(int height,int width){ //le deplacement random est commun aux moutons et aux loups
 		
 		orientation=(int) Math.random()*3+1;
 		
 		 switch ( orientation ) 
 		 {
 	    	case 1: // nord	
-	    		y = ( y - 1 + terrain.getHeight() ) % terrain.getHeight();
+	    		y = ( y - 1 + height ) % height;
 	    		break;
 	    	case 2:	// ouest
-	    		x = ( x - 1 + terrain.getWidth() ) % terrain.getWidth();
+	    		x = ( x - 1 + width ) % width;
 				break;
 	    	case 3:	// sud
-	    		y = ( y + 1 + terrain.getHeight() ) % terrain.getHeight();
+	    		y = ( y + 1 + height ) % height;
 				break;
 	    	case 4:	// est
-	    		x = ( x + 1 + terrain.getWidth() ) % terrain.getWidth();
+	    		x = ( x + 1 + width ) % width;
 				break;
 		 }
 		

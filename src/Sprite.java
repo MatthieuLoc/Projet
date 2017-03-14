@@ -24,10 +24,12 @@ public class Sprite extends JPanel {
 	private Image bord27;
 	
 	private int spriteLength = 16;
+	private Terrain terrain;
 	
-	final Terrain terrain;
+
 	
-	public Sprite(){
+	public Sprite(Terrain terrain){
+		this.terrain=terrain;
 	
 		try{
 			herbe = ImageIO.read(new File("herbe.png"));
@@ -52,14 +54,7 @@ public class Sprite extends JPanel {
 		frame.setSize(800,500);
 		frame.setVisible(true);
 		
-		terrain = new Terrain(80,50,9);
-		
-		terrain.init();
-		terrain.pointHaut();
-		terrain.strates2();
-		terrain.ajoutArbres();
-		
-		System.out.println(terrain.toString3());
+
 		
 	}
 	
