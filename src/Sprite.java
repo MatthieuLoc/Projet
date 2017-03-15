@@ -22,15 +22,18 @@ public class Sprite extends JPanel {
 	private Image bord25;
 	private Image coin26;
 	private Image bord27;
+	private Image mouton;
 	
 	private int spriteLength = 16;
 	private Terrain terrain;
+	private Animaux animaux;
 
 	
 
 	
-	public Sprite(Terrain terrain){
+	public Sprite(Terrain terrain,Animaux animaux){
 		this.terrain=terrain;
+		this.animaux=animaux;
 	
 		try{
 			herbe = ImageIO.read(new File("herbe.png"));
@@ -44,6 +47,8 @@ public class Sprite extends JPanel {
 			bord25 = ImageIO.read(new File("25_2.png"));
 			coin26 = ImageIO.read(new File("26_2.png"));
 			bord27 = ImageIO.read(new File("27.png"));
+			mouton = ImageIO.read(new File("mouton.png"));
+			
 		}
 		catch(Exception e){
 			e.printStackTrace();
@@ -63,6 +68,8 @@ public class Sprite extends JPanel {
 	{
 		Graphics2D g2 = (Graphics2D)g;
 		Graphics2D g3 = (Graphics2D)g;
+		Graphics2D g4 = (Graphics2D)g;
+		
 		for ( int i = 0 ; i < terrain.getWidth() ; i++ )
 			for ( int j = 0 ; j < terrain.getHeight() ; j++ )
 			{
@@ -101,6 +108,10 @@ public class Sprite extends JPanel {
 				
 				else if(terrain.getEnvironnement()[i][j]==31){
 					g3.drawImage(tree,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+				}
+				
+				if(animaux.getMatrice()[i][j]==2){
+					g4.drawImage(mouton,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				
 					

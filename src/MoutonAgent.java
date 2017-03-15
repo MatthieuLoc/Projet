@@ -12,6 +12,8 @@
 public class MoutonAgent extends Agent {
 	
 	boolean mechant;
+	
+	
 	public MoutonAgent(int x, int y){
 	super( x, y);
 	mechant=false;

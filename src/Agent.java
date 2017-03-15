@@ -6,7 +6,6 @@ public abstract class Agent {
 	int orientation; //1=N, 2=0, 3=S, 4=E (sens trigo)
 	int x,y;
 	int energy;
-	
 	int last;
 
 

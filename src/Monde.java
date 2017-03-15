@@ -2,33 +2,34 @@
 public class Monde {
 
 	public static void main(String[] args) {
-		int width=30;
-		int height=50;
+		int width=50;
+		int height=30;
 		int hauteur;
 		int nmouton=8;
-		int nloup;
+		int nloup=0;
 		int i,j;
+		Animaux animaux;
+		
 		Terrain terrain;
-		MoutonAgent[] moutons=new MoutonAgent[nmouton];
-		
-		terrain = new Terrain(85,50,9);
-		
+		terrain = new Terrain(width,height,5);
 		terrain.init();
 		terrain.pointHaut();
 		terrain.strates2();
 		terrain.ajoutArbres();
 		System.out.println(terrain.toString3());
 		
-		for(i=0;i<nmouton;i++){
-			moutons[i]=new MoutonAgent((int) Math.random()*width,(int) Math.random()*height);
-		}
+		animaux=new Animaux(nmouton,nloup,width,height);
+		animaux.remplirMoutons();
+		System.out.println(animaux.toString3());
+		
+		
 
 		//initialisation du monde
 		//creation matrice terrain, liste agents liste predateurs
 		
 
 		
-		Sprite dessin = new Sprite(terrain);
+		Sprite dessin = new Sprite(terrain,animaux);
 
 		//boucle infinie
 		
