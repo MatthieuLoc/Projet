@@ -28,12 +28,32 @@ public class Sprite extends JPanel {
 	private Terrain terrain;
 	private Animaux animaux;
 
+	int size_x;
+	int size_y;
 	
-
+	public void Animaux(){
+		
+	}
 	
-	public Sprite(Terrain terrain,Animaux animaux){
+	public void Environnement(){
+		
+	}
+	public void Terrain(){
+		
+	}
+	
+	public void Fenetre(){
+		
+	}
+	
+	
+	
+	public Sprite(Terrain terrain,Animaux animaux,int size_x,int size_y){
 		this.terrain=terrain;
 		this.animaux=animaux;
+		this.size_x=size_x;
+		this.size_y=size_y;
+		
 	
 		try{
 			herbe = ImageIO.read(new File("herbe.png"));
@@ -54,51 +74,53 @@ public class Sprite extends JPanel {
 			e.printStackTrace();
 			System.exit(-1);
 		}
-	
+		
 		frame = new JFrame("TERRAIN");
 		frame.add(this);
-		frame.setSize(800,500);
+		
+		frame.setSize((size_x*spriteLength),(size_y*spriteLength));
+		
 		frame.setVisible(true);
 		
 
 		
 	}
 	
-	public void paint(Graphics g)
-	{
+	public void paint(Graphics g){
+		//System.out.println("je suis dans le paint");
 		Graphics2D g2 = (Graphics2D)g;
 		Graphics2D g3 = (Graphics2D)g;
 		Graphics2D g4 = (Graphics2D)g;
 		
-		for ( int i = 0 ; i < terrain.getWidth() ; i++ )
-			for ( int j = 0 ; j < terrain.getHeight() ; j++ )
+		for ( int i = 0 ; i < terrain.getSizeX() ; i++ )
+			for ( int j = 0 ; j < terrain.getSizeY() ; j++ )
 			{
 				if ( terrain.getTerrain()[i][j] < 10 ){
 					g2.drawImage(herbe,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 20 ){
-					g2.drawImage(coin24,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g2.drawImage(coin20,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 21 ){
-					g2.drawImage(bord23,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g2.drawImage(bord21,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 22 ){
 					g2.drawImage(coin22,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 23 ){
-					g2.drawImage(bord21,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g2.drawImage(bord23,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 24 ){
-					g2.drawImage(coin20,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g2.drawImage(coin24,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 25 ){
-					g2.drawImage(bord27,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g2.drawImage(bord25,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 26 ){
 					g2.drawImage(coin26,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				else if ( terrain.getTerrain()[i][j] == 27 ){
-					g2.drawImage(bord25,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g2.drawImage(bord27,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				
 				
@@ -107,7 +129,7 @@ public class Sprite extends JPanel {
 				}
 				
 				else if(terrain.getEnvironnement()[i][j]==31){
-					g3.drawImage(tree,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g3.drawImage(tree2,spriteLength*i,(spriteLength*j)-spriteLength,spriteLength,spriteLength*2, frame);
 				}
 				
 				if(animaux.getMatrice()[i][j]==2){
@@ -117,6 +139,11 @@ public class Sprite extends JPanel {
 					
 			}
 	}
+
+	public void refresh(){
+		frame.repaint();
+	}
+
 
 
 	

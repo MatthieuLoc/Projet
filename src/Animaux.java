@@ -31,12 +31,12 @@ public class Animaux {
 	public int addMouton(int x, int y){
 		int i=0;
 		
-		while(moutons[i] != null && i<nmouton){
+		while(moutons[i] != null && i<=nmouton){
 			//System.out.println("Mouton créé  n°"+" x="+x+"y="+y+" i="+i);
 			i++;
 		}
 		
-		if(i !=(nmouton-1)){
+		if(i !=(nmouton)){
 			moutons[i]=new MoutonAgent(x,y);
 			matriceAnimaux[x][y]=2;
 			
