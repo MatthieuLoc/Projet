@@ -23,23 +23,26 @@ public abstract class Agent {
 
 	public void deplacementRandom(int height,int width){ //le deplacement random est commun aux moutons et aux loups
 		
-		orientation=(int) Math.random()*3+1;
-		
-		 switch ( orientation ) 
-		 {
-	    	case 1: // nord	
+		int k=(int)( Math.random()*4);
+	
+	    	if(k==0){ // nord	
+	    		//System.out.println("N"+k);
 	    		y = ( y - 1 + height ) % height;
-	    		break;
-	    	case 2:	// ouest
+	    	}
+
+	    	if(k==1){	// ouest
+	    		//System.out.println("O"+k);
 	    		x = ( x - 1 + width ) % width;
-				break;
-	    	case 3:	// sud
+	    	}
+	    	if(k==2){	// sud
+	    		//System.out.println("S"+k);
 	    		y = ( y + 1 + height ) % height;
-				break;
-	    	case 4:	// est
+	    	}
+	    	if(k==3){	// est
+	    		//System.out.println("E"+k);
 	    		x = ( x + 1 + width ) % width;
-				break;
-		 }
+	    	}
+
 		
 		
 	}

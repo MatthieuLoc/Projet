@@ -9,12 +9,17 @@ public class Animaux {
 	int nloup;
 	int width;
 	int height;
+	int[][] terrain;
+	int[][] environnement;
 	
-	public Animaux(int nmouton, int nloup,int width,int height){
+	
+	public Animaux(int nmouton, int nloup,int width,int height,int[][] terrain, int[][] environnement){
 		this.nmouton=nmouton;
 		this.nloup=nloup;
 		this.width=width;
 		this.height=height;
+		this.terrain=terrain;
+		this.environnement=environnement;
 		matriceAnimaux=new int[width][height];
 		moutons=new MoutonAgent[nmouton];
 		
@@ -25,12 +30,16 @@ public class Animaux {
 	//parcourt le tableau jusqu'a trouver un emplacement null, y ajoute un mouton et renvoie 1, sinon renvoie 0
 	public int addMouton(int x, int y){
 		int i=0;
+		
 		while(moutons[i] != null && i<nmouton){
+			//System.out.println("Mouton créé  n°"+" x="+x+"y="+y+" i="+i);
 			i++;
 		}
-		if(i==(nmouton-1)){
+		
+		if(i !=(nmouton-1)){
 			moutons[i]=new MoutonAgent(x,y);
 			matriceAnimaux[x][y]=2;
+			
 			return 1;
 		}
 		else{
@@ -39,27 +48,36 @@ public class Animaux {
 	}
 	
 	
-	
+	public void deplacementRandom(Agent[] animal){
+		for(int i=0;i<nmouton;i++){
+			if(animal[i] != null){
+			matriceAnimaux[animal[i].x][animal[i].y]=0;
+			
+				animal[i].deplacementRandom(width, height);
+				//System.out.println("animal:"+i+" x= "+animal[i].x+ " y="+animal[i].y);
+				matriceAnimaux[animal[i].x][animal[i].y]=2;
+				
+			}
+		}
+	}
 	
 	public void addMoutonRand(){
-		int x=(int)Math.random()*width+1;
-		int y=(int)Math.random()*height+1;
+		int x=(int)(Math.random()*width);
+		int y=(int)(Math.random()*height);
+		
+		while(environnement[x][y]==30 || environnement[x][y]==31){
+			//System.out.println("zut");
+			x=(int)(Math.random()*width);
+			y=(int)(Math.random()*height);
+		}
 		addMouton(x,y);
 	}
 	
 	public void remplirMoutons(){
-		int i;
-		int x;
-		int y;
 		
-		for(i=0;i<nmouton;i++){
+		for(int i=0;i<nmouton;i++){
 			
-			x=(int)(Math.random()*width);
-			y=(int)(Math.random()*height);
-			
-			moutons[i]=new MoutonAgent(x,y);
-			System.out.println("Mouton créé  n°"+i+ "x="+x+" y="+y);
-			matriceAnimaux[x][y]=2;
+			addMoutonRand();
 			
 		}
 	}
@@ -81,7 +99,7 @@ public class Animaux {
 				}
 				if(matriceAnimaux[i][j]==2){
 
-					s += "O ";
+					s += "o ";
 				}
 			}
 			s += "\n";
