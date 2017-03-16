@@ -7,7 +7,7 @@ public class Monde {
 		int height=20;
 		int hauteur=0;
 		int nmouton=5;
-		int nloup=0;
+		int nloup=10;
 		int i,j;
 		Animaux animaux;
 		

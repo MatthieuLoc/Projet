@@ -7,20 +7,20 @@ public class Animaux {
 	MoutonAgent[] moutons;
 	int nmouton;
 	int nloup;
-	int width;
-	int height;
+	int size_x;
+	int size_y;
 	int[][] terrain;
 	int[][] environnement;
 	
 	
-	public Animaux(int nmouton, int nloup,int width,int height,int[][] terrain, int[][] environnement){
+	public Animaux(int nmouton, int nloup,int size_x,int size_y,int[][] terrain, int[][] environnement){
 		this.nmouton=nmouton;
 		this.nloup=nloup;
-		this.width=width;
-		this.height=height;
+		this.size_x=size_x;
+		this.size_y=size_y;
 		this.terrain=terrain;
 		this.environnement=environnement;
-		matriceAnimaux=new int[width][height];
+		matriceAnimaux=new int[size_x][size_y];
 		moutons=new MoutonAgent[nmouton];
 		
 		
@@ -53,7 +53,7 @@ public class Animaux {
 			if(animal[i] != null){
 			matriceAnimaux[animal[i].x][animal[i].y]=0;
 			
-				animal[i].deplacementRandom(width, height);
+				animal[i].deplacementRandom(size_x, size_y);
 				//System.out.println("animal:"+i+" x= "+animal[i].x+ " y="+animal[i].y);
 				matriceAnimaux[animal[i].x][animal[i].y]=2;
 				
@@ -62,13 +62,13 @@ public class Animaux {
 	}
 	
 	public void addMoutonRand(){
-		int x=(int)(Math.random()*width);
-		int y=(int)(Math.random()*height);
+		int x=(int)(Math.random()*size_x);
+		int y=(int)(Math.random()*size_y);
 		
 		while(environnement[x][y]==30 || environnement[x][y]==31){
 			//System.out.println("zut");
-			x=(int)(Math.random()*width);
-			y=(int)(Math.random()*height);
+			x=(int)(Math.random()*size_x);
+			y=(int)(Math.random()*size_y);
 		}
 		addMouton(x,y);
 	}
@@ -92,8 +92,8 @@ public class Animaux {
 	
 	public String toString3(){
 		String s="";
-		for(int i=0; i<width; i++){
-			for(int j=0; j<height; j++){
+		for(int i=0; i<size_x; i++){
+			for(int j=0; j<size_y; j++){
 				if(matriceAnimaux[i][j]==0){
 					s += "- ";
 				}
