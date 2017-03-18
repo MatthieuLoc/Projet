@@ -12,79 +12,80 @@
 	
 public class LoupAgent extends Agent {
 
-	private int essai=0;
 	public LoupAgent(int x, int y){
 	super( x, y,true);
 	}
 	
-	
 
-	/*RAPPEL DU CONTENU D'AGENT
- 	boolean _alive;
-	int _state; //etat (poursuite /fuite/attente...)
-	int _orientation; //1=N, 2=0, 3=S, 4=E (sens trigo)
-	int _x,_y;
-	int _energy;
-	
-	int _last;
-	boolean mechant;
 
- */
-	
 	public void move(int[][] environnement,int o){
+		//System.out.println("essai "+essai);
 		switch(o){
 		
 		case(1):
-			if(environnement[x][y-1] !=30 && environnement[x][y-1] !=31){
-				y--;
-				orientation=o;
-				essai=0;
+			if(y==0){
+				move(environnement,3);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x][y-1] !=30 && environnement[x][y-1] !=31){
+
+					
+					y--;
+					orientation=o;
+
 				}
-				
+				else{
+						move(environnement,o+1);
+					
+				}
 			}
 		break;
 		case(2):
-			if(environnement[x-1][y] !=30 && environnement[x][y-1] !=31){
-				x--;
-				orientation=o;
-				essai=0;
+			if(x==0){
+				move(environnement,4);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x-1][y] !=30 && environnement[x-1][y] !=31){
+					x--;
+					orientation=o;
+
 				}
-				
+				else{
+						move(environnement,o+1);
+
+					
+				}
 			}
 		break;
 		case(3):
-			if(environnement[x][y+1] !=30 && environnement[x][y-1] !=31){
-				y++;
-				orientation=o;
-				essai=0;
+			if(y==(Glob.size_y-1)){
+				move(environnement,1);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x][y+1] !=30 && environnement[x][y+1] !=31){
+					y++;
+					orientation=o;
+
+				}
+				else{
+
+						move(environnement,o+1);
 				}
 			}
 		break;
 		case(4):
-			if(environnement[x+1][y] !=30 && environnement[x][y-1] !=31){
-				x++;
-				orientation=o;
-				essai=0;
+			if(x==(Glob.size_x-1)){
+				move(environnement,2);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x+1][y] !=30 && environnement[x+1][y] !=31){
+					x++;
+					orientation=o;
+
+				}
+				else{
+
+						move(environnement,o+1);
 				}
 			}
 		break;
@@ -92,12 +93,14 @@ public class LoupAgent extends Agent {
 		
 	}
 	
+
 	
 	
 	public  void moveRand(int[][]environnement){
 			int o;
 			do{
-				o=(int)(Math.random()*4)+1;
+				o=(int)((Math.random()*4)+1);
+				System.out.println(o);
 			}
 			while(o ==((orientation+2)%5));
 			move(environnement,o);

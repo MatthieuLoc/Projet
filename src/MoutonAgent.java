@@ -13,7 +13,8 @@
 	
 public class MoutonAgent extends Agent {
 
-	private int essai=0;
+
+	
 	public MoutonAgent(int x, int y){
 	super( x, y,false);
 	}
@@ -21,60 +22,77 @@ public class MoutonAgent extends Agent {
 	
 	
 	public void move(int[][] environnement,int o){
-		System.out.println("essai "+essai);
+		//System.out.println("essai "+essai);
 		switch(o){
 		
 		case(1):
-			if(environnement[x][y-1] !=30 && environnement[x][y-1] !=31){
-				y--;
-				orientation=o;
-				essai=0;
+			if(y==0){
+				move(environnement,3);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x][y-1] !=30 && environnement[x][y-1] !=31){
+
+					
+					y--;
+					orientation=o;
+
 				}
-				
+				else{
+						
+						move(environnement,o+1);
+
+					
+				}
 			}
 		break;
 		case(2):
-			if(environnement[x-1][y] !=30 && environnement[x][y-1] !=31){
-				x--;
-				orientation=o;
-				essai=0;
+			if(x==0){
+				move(environnement,4);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x-1][y] !=30 && environnement[x-1][y] !=31){
+					x--;
+					orientation=o;
+
 				}
-				
+				else{
+
+						move(environnement,o+1);
+					
+				}
 			}
 		break;
 		case(3):
-			if(environnement[x][y+1] !=30 && environnement[x][y-1] !=31){
-				y++;
-				orientation=o;
-				essai=0;
+			if(y==(Glob.size_y-1)){
+				move(environnement,1);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x][y+1] !=30 && environnement[x][y+1] !=31){
+					y++;
+					orientation=o;
+
+				}
+				else{
+
+						move(environnement,o+1);
+
 				}
 			}
 		break;
 		case(4):
-			if(environnement[x+1][y] !=30 && environnement[x][y-1] !=31){
-				x++;
-				orientation=o;
-				essai=0;
+			if(x==(Glob.size_x-1)){
+				move(environnement,2);
 			}
 			else{
-				if(essai<=4){
-					essai++;
-					move(environnement,o+1);
+				if(environnement[x+1][y] !=30 && environnement[x+1][y] !=31){
+					x++;
+					orientation=o;
+
+				}
+				else{
+
+						move(environnement,o+1);
+
 				}
 			}
 		break;
@@ -86,10 +104,10 @@ public class MoutonAgent extends Agent {
 	
 	public  void moveRand(int[][]environnement){
 			int o;
-			do{
-				o=(int)(Math.random()*4)+1;
-			}
-			while(o ==((orientation+2)%5));
+			//do{
+				o=(int)((Math.random()*4)+1);
+			//}
+			//while(o==((orientation+2)%5));
 			move(environnement,o);
 	}
 

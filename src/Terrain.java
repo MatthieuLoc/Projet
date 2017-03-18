@@ -195,7 +195,7 @@ public class Terrain{
 	
 
 public void ajoutArbres(){
-		int nbforets = 5; // -> rendre aléatoire
+		int nbforets = 3; // -> rendre aléatoire
 		int etendue = 30; // -> rendre aléatoire
 		int t = 0;
 		

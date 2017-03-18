@@ -15,15 +15,25 @@ public abstract class Agent {
 		this.x=x;
 		this.y=y;
 		this.orientation=0;
-		this.energy=50; //max energy
+		this.energy=Glob.maxEnergy; //max energy
 		this.last=0; //somme des 2 dernieres orientations
 		this.alive=true;
-		this.state=0; 
+		this.state=0; //etat 1 en chasse 
 		this.mechant=mechant;
 		
 	}
 	
-
+	public void nourri(){
+		this.state=0;
+		this.energy=Glob.maxEnergy;
+		
+	}
+	
+	public void meurs(){
+		this.state=0;
+		this.energy=Glob.maxEnergy;
+		this.alive=false;
+	}
 	
 	public abstract void moveRand(int[][]environnement);
 	

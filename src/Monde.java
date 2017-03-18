@@ -20,7 +20,6 @@ public class Monde {
 		
 		animaux.init(terrain.getTerrain());
 
-		System.out.println("je suis dans le paint");
 		
 
 		//initialisation du monde
@@ -31,12 +30,13 @@ public class Monde {
 		sprite=new Sprite(terrain,animaux);
 		
 		for(;;){
-			animaux.moveRand(terrain.getTerrain());
+			animaux.step(terrain.getEnvironnement());
 			
 			sprite.refresh();
 			//System.out.println(animaux.toString3());
+			
 			try {
-			    Thread.sleep(100);                 //1000 milliseconds is one second.
+			    Thread.sleep(10);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}

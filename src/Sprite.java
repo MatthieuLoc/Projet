@@ -24,6 +24,7 @@ public class Sprite extends JPanel {
 	private Image bord27;
 	private Image mouton;
 	private Image loup;
+	private Image moutonLoup;
 	
 	private int spriteLength = 16;
 	private Terrain terrain;
@@ -67,6 +68,7 @@ public class Sprite extends JPanel {
 			bord27 = ImageIO.read(new File("27.png"));
 			mouton = ImageIO.read(new File("mouton.png"));
 			loup = ImageIO.read(new File("loup.png"));
+			moutonLoup = ImageIO.read(new File("moutonLoup.png"));
 			
 		}
 		catch(Exception e){
@@ -77,7 +79,7 @@ public class Sprite extends JPanel {
 		frame = new JFrame("TERRAIN");
 		frame.add(this);
 		
-		frame.setSize((Glob.size_x*spriteLength),(Glob.size_y*spriteLength));
+		frame.setSize(((Glob.size_x+2)*spriteLength),((Glob.size_y+1)*spriteLength));
 		
 		frame.setVisible(true);
 		
@@ -137,6 +139,9 @@ public class Sprite extends JPanel {
 				//loups=3 (voir getmatrice animaux)
 				if(animaux.getMatrice()[i][j]==3){
 					g4.drawImage(loup,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+				}
+				if(animaux.getMatrice()[i][j]==5){
+					g4.drawImage(moutonLoup,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				
 					

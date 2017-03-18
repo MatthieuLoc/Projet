@@ -38,25 +38,48 @@ public class Animaux {
 		}
 	}
 	
+	
+	
 	public void moveRand( int[][] environnement){
 		for(int i=0;i<taille;i++){
-			matrice[animaux[i].x][animaux[i].y]=0;
+			//matrice[animaux[i].x][animaux[i].y]=0;
 			animaux[i].moveRand(environnement);
-			matrice[animaux[i].x][animaux[i].y]=2;
+			//matrice[animaux[i].x][animaux[i].y]=2;
 		}
 	}
 	
-	public void step(){
+	public void loupMange(){
+		for(int l=Glob.nmoutons;l<taille;l++){
+			for(int m=0;m<Glob.nmoutons;m++){
+				if((animaux[l].x==animaux[m].x)&&(animaux[l].y==animaux[m].y)){
+					animaux[l].nourri();
+					animaux[m].meurs();
+				}
+			}
+			
+		}
+	}
+	
+	public void step(int[][] environnement){
+		this.loupMange();
+		this.moveRand(environnement);
+		
 		
 	}
 	public int[][] getMatrice(){
+		this.cleanMatrice();
 		for(int i=0;i<taille;i++){
-			if(animaux[i].mechant==true){
-				matrice[animaux[i].x][animaux[i].y]=2;
+			if(animaux[i].alive==true){
+				if(animaux[i].mechant==true){
+					//matrice[animaux[i].x][animaux[i].y]=2;
+					matrice[animaux[i].x][animaux[i].y]=matrice[animaux[i].x][animaux[i].y]+2;
+				}
+				else
+					//matrice[animaux[i].x][animaux[i].y]=3;
+					matrice[animaux[i].x][animaux[i].y]=matrice[animaux[i].x][animaux[i].y]+3;
 			}
-			else
-				matrice[animaux[i].x][animaux[i].y]=3;
 		}
+
 		return matrice;
 	}
 	public void cleanMatrice(){
