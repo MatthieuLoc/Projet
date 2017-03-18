@@ -23,14 +23,13 @@ public class Sprite extends JPanel {
 	private Image coin26;
 	private Image bord27;
 	private Image mouton;
+	private Image loup;
 	
 	private int spriteLength = 16;
 	private Terrain terrain;
 	private Animaux animaux;
 
-	int size_x;
-	int size_y;
-	
+
 	public void Animaux(){
 		
 	}
@@ -48,11 +47,10 @@ public class Sprite extends JPanel {
 	
 	
 	
-	public Sprite(Terrain terrain,Animaux animaux,int size_x,int size_y){
+	public Sprite(Terrain terrain,Animaux animaux){
 		this.terrain=terrain;
 		this.animaux=animaux;
-		this.size_x=size_x;
-		this.size_y=size_y;
+
 		
 	
 		try{
@@ -68,6 +66,7 @@ public class Sprite extends JPanel {
 			coin26 = ImageIO.read(new File("26_2.png"));
 			bord27 = ImageIO.read(new File("27.png"));
 			mouton = ImageIO.read(new File("mouton.png"));
+			loup = ImageIO.read(new File("loup.png"));
 			
 		}
 		catch(Exception e){
@@ -78,7 +77,7 @@ public class Sprite extends JPanel {
 		frame = new JFrame("TERRAIN");
 		frame.add(this);
 		
-		frame.setSize((size_x*spriteLength),(size_y*spriteLength));
+		frame.setSize((Glob.size_x*spriteLength),(Glob.size_y*spriteLength));
 		
 		frame.setVisible(true);
 		
@@ -87,7 +86,7 @@ public class Sprite extends JPanel {
 	}
 	
 	public void paint(Graphics g){
-		//System.out.println("je suis dans le paint");
+		
 		Graphics2D g2 = (Graphics2D)g;
 		Graphics2D g3 = (Graphics2D)g;
 		Graphics2D g4 = (Graphics2D)g;
@@ -131,9 +130,13 @@ public class Sprite extends JPanel {
 				else if(terrain.getEnvironnement()[i][j]==31){
 					g3.drawImage(tree2,spriteLength*i,(spriteLength*j)-spriteLength,spriteLength,spriteLength*2, frame);
 				}
-				
+				//moutons=2 (voir getmatrice animaux)
 				if(animaux.getMatrice()[i][j]==2){
 					g4.drawImage(mouton,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+				}
+				//loups=3 (voir getmatrice animaux)
+				if(animaux.getMatrice()[i][j]==3){
+					g4.drawImage(loup,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				
 					

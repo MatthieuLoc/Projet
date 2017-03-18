@@ -3,27 +3,24 @@ import java.lang.*;
 public class Monde {
 
 	public static void main(String[] args) {
-		int size_x=78;
-		int size_y=48;
-		int hauteur=7;
-		int nmouton=2;
-		int nloup=10;
+
 		int i,j;
 		Animaux animaux;
 		Sprite sprite;
-		
+		int [][]buffer;
 		Terrain terrain;
-		terrain = new Terrain(size_x,size_y,hauteur);
+		terrain = new Terrain();
 		terrain.init();
 		terrain.pointHaut();
 		terrain.strates();
 		terrain.ajoutArbres();
-		System.out.println(terrain.toString3());
+		//System.out.println(terrain.toString3());
 		
-		animaux=new Animaux(nmouton,nloup,size_x,size_y,terrain.getTerrain(), terrain.getEnvironnement());
-		animaux.remplirMoutons();
-		System.out.println(animaux.toString3());
+		animaux=new Animaux();
 		
+		animaux.init(terrain.getTerrain());
+
+		System.out.println("je suis dans le paint");
 		
 
 		//initialisation du monde
@@ -31,15 +28,15 @@ public class Monde {
 		
 
 		
-		sprite=new Sprite(terrain,animaux,size_x,size_y);
+		sprite=new Sprite(terrain,animaux);
 		
 		for(;;){
-			animaux.deplacementRandom(animaux.moutons);
+			animaux.moveRand(terrain.getTerrain());
 			
 			sprite.refresh();
 			//System.out.println(animaux.toString3());
 			try {
-			    Thread.sleep(200);                 //1000 milliseconds is one second.
+			    Thread.sleep(100);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}

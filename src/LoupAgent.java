@@ -9,19 +9,29 @@
 	boolean mechant;
 
  */
-
 	
-public class MoutonAgent extends Agent {
+public class LoupAgent extends Agent {
 
 	private int essai=0;
-	public MoutonAgent(int x, int y){
-	super( x, y,false);
+	public LoupAgent(int x, int y){
+	super( x, y,true);
 	}
 	
 	
+
+	/*RAPPEL DU CONTENU D'AGENT
+ 	boolean _alive;
+	int _state; //etat (poursuite /fuite/attente...)
+	int _orientation; //1=N, 2=0, 3=S, 4=E (sens trigo)
+	int _x,_y;
+	int _energy;
+	
+	int _last;
+	boolean mechant;
+
+ */
 	
 	public void move(int[][] environnement,int o){
-		System.out.println("essai "+essai);
 		switch(o){
 		
 		case(1):
@@ -92,6 +102,7 @@ public class MoutonAgent extends Agent {
 			while(o ==((orientation+2)%5));
 			move(environnement,o);
 	}
+
 
 
 }

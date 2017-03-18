@@ -3,35 +3,27 @@
 
 
 public class Terrain{
-	private int size_x;
-	private int size_y;
-	private int altitude;   //doit être pair
-	private int f;          //facteur de marge (f*altitude)
+  //doit être pair
+	private int f;          //facteur de marge (f*Glob.hauteur)
 	private int x_haut;
 	private int y_haut;
 	
 	private int[][] terrain;
 	private int[][] environnement;
 	
-	public Terrain(int sx, int sy, int alt){
-		size_x = sx;
-		size_y = sy;
-		altitude = alt;
+	public Terrain(){
+
 		f = 2;
-		terrain = new int[size_x][size_y];
-		environnement = new int[size_x][size_y];
+		terrain = new int[Glob.size_x][Glob.size_y];
+		environnement = new int[Glob.size_x][Glob.size_y];
 	}
 	
-
-		public Terrain(int s, int alt){
-		this(s,s,alt);
-	}
 
 
 	//initialiser à zéro
 	public void init(){
-		for(int j=0; j<size_y; j++){
-			for(int i=0; i<size_x; i++){
+		for(int j=0; j<Glob.size_y; j++){
+			for(int i=0; i<Glob.size_x; i++){
 				terrain[i][j]= 0;
 				environnement[i][j]= 0;
 			}
@@ -43,8 +35,8 @@ public class Terrain{
 		double p=0.001;	
 		
 		for(;;){
-			for(int j = altitude*f; j<size_y-(altitude*f);j++){
-				for(int i = altitude*f; i<size_x-(altitude*f); i++){
+			for(int j = Glob.hauteur*f; j<Glob.size_y-(Glob.hauteur*f);j++){
+				for(int i = Glob.hauteur*f; i<Glob.size_x-(Glob.hauteur*f); i++){
 					if (p >= Math.random()){
 						
 						terrain[i][j]=0;
@@ -61,8 +53,8 @@ public class Terrain{
 	//affichage des valeurs de terrain
 	public String toString(){
 		String s = "";
-		for(int j=0; j<size_y; j++){
-			for(int i=0; i<size_x; i++){
+		for(int j=0; j<Glob.size_y; j++){
+			for(int i=0; i<Glob.size_x; i++){
 				s += terrain[i][j] + " ";
 			}
 			s += "\n";
@@ -74,8 +66,8 @@ public class Terrain{
 	//pour visualiser les strates
 	public String toString2(){
 		String s="";
-		for(int j=0; j<size_y; j++){
-			for(int i=0; i<size_x; i++){
+		for(int j=0; j<Glob.size_y; j++){
+			for(int i=0; i<Glob.size_x; i++){
 				if(terrain[i][j]==0){
 					s += "- ";
 				}
@@ -91,8 +83,8 @@ public class Terrain{
 	//pour visualiser la répartitions des arbres
 	public String toString3(){
 		String s="";
-		for(int j=0; j<size_y; j++){
-			for(int i=0; i<size_x; i++){
+		for(int j=0; j<Glob.size_y; j++){
+			for(int i=0; i<Glob.size_x; i++){
 				if(environnement[i][j]==0){
 					s += "- ";
 				}
@@ -112,9 +104,9 @@ public class Terrain{
 		int y1 = 2;
 		int y2 = 2;
 		
-		for(int t = 0; t < altitude; t++){
-			for(int j=0; j < size_y; j++){
-				for(int i=0; i < size_x; i++){
+		for(int t = 0; t < Glob.hauteur; t++){
+			for(int j=0; j < Glob.size_y; j++){
+				for(int i=0; i < Glob.size_x; i++){
 					
 					// coins
 					if((i==x_haut-x1)&&(j==y_haut+y2)){
@@ -146,7 +138,7 @@ public class Terrain{
 					
 					// plateau
 					else if((j>y_haut-y1)&&(j<y_haut+y2)&&(i<x_haut+x2)&&(i>x_haut-x1)&&(terrain[i][j]==0)){
-						terrain[i][j]=altitude-t;
+						terrain[i][j]=Glob.hauteur-t;
 					}
 				}
 			}
@@ -160,12 +152,12 @@ public class Terrain{
 		
 	}
 	
-	public void ajoutArbres(){
-		double probarbre = 0.3;
+	public void ajoutArbresRand(){
+		double probarbre = 0.4;
 		
-		for(int j=0; j < size_y; j++){
-			for(int i=0; i < size_x; i++){
-				if((terrain[i][j]<altitude-2)&&(Math.random()<probarbre)){
+		for(int j=0; j < Glob.size_y; j++){
+			for(int i=0; i < Glob.size_x; i++){
+				if((terrain[i][j]<Glob.hauteur-2)&&(Math.random()<probarbre)){
 					
 					//2 types d'arbres, une chance sur 2
 					if(Math.random()<0.5){
@@ -184,10 +176,10 @@ public class Terrain{
 	/* --- méthodes GET --- */
 	
 	int getSizeX(){
-		return size_x;
+		return Glob.size_x;
 	}
 	int getSizeY(){
-		return size_y;
+		return Glob.size_y;
 	}
 	
 	
@@ -201,6 +193,54 @@ public class Terrain{
 	
 	
 	
+
+public void ajoutArbres(){
+		int nbforets = 5; // -> rendre aléatoire
+		int etendue = 30; // -> rendre aléatoire
+		int t = 0;
+		
+		while(t<nbforets){
+			for(int j=0; j < Glob.size_y; j++){
+				for(int i=0; i < Glob.size_x; i++){
+					
+					//génération d'UN centre de forêt
+					// -> rendre mieux réparti
+					if((terrain[i][j]<Glob.hauteur)&&(terrain[i][j]>=0)&&(Math.random()<0.0001)){
+						if(t==nbforets){
+							return;
+						}
+						environnement[i][j]=30;
+						
+						//génération d'UNE forêt
+						for(int b = ((j-etendue)>=0 ? j-etendue : 0); b < ( (j+etendue)>Glob.size_y ? Glob.size_y : j+etendue ); b++){
+							for(int c = ((i-etendue)>=0 ? i-etendue : 0); c < ( (i+etendue)>Glob.size_x ? Glob.size_x : i+etendue ); c++){
+								
+								//distance entre le point courant et le centre de la forêt
+								double dist = Math.sqrt((Math.abs(i-c)*Math.abs(i-c))+(Math.abs(j-b)*Math.abs(j-b)));
+								
+								//plus c'est loin du centre, plus la probabilité de pousse d'un arbre est faible
+								// ici la fonction est f(x)=1-0,07x
+								//j'aimerais bien un truc logarithmique ou exponentiel
+								if((Math.random() < 1-(0.07*dist))&&(terrain[c][b]<10)&&(terrain[c][b]>=0)){
+									
+									//type d'arbre (au pif, à mieux faire)
+									if(Math.random()<0.2){
+										environnement[c][b]=31;
+									}
+									else{
+										environnement[c][b]=30;
+									}
+								}
+							}
+						}
+
+						//forêt terminée
+						t ++;
+					}
+				}
+			}
+		}
+	}
 	
 	
 	
