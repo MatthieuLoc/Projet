@@ -20,7 +20,7 @@ public class MoutonAgent extends Agent {
 	}
 	
 	
-	
+
 	public void move(int[][] environnement,int o){
 		//System.out.println("essai "+essai);
 		switch(o){
@@ -38,9 +38,7 @@ public class MoutonAgent extends Agent {
 
 				}
 				else{
-						
 						move(environnement,o+1);
-
 					
 				}
 			}
@@ -56,8 +54,8 @@ public class MoutonAgent extends Agent {
 
 				}
 				else{
-
 						move(environnement,o+1);
+
 					
 				}
 			}
@@ -75,7 +73,6 @@ public class MoutonAgent extends Agent {
 				else{
 
 						move(environnement,o+1);
-
 				}
 			}
 		break;
@@ -92,7 +89,6 @@ public class MoutonAgent extends Agent {
 				else{
 
 						move(environnement,o+1);
-
 				}
 			}
 		break;
@@ -100,14 +96,14 @@ public class MoutonAgent extends Agent {
 		
 	}
 	
+
 	
 	
 	public  void moveRand(int[][]environnement){
 			int o;
-			//do{
+
 				o=(int)((Math.random()*4)+1);
-			//}
-			//while(o==((orientation+2)%5));
+
 			move(environnement,o);
 	}
 

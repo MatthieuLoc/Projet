@@ -98,11 +98,9 @@ public class LoupAgent extends Agent {
 	
 	public  void moveRand(int[][]environnement){
 			int o;
-			do{
+			
 				o=(int)((Math.random()*4)+1);
-				System.out.println(o);
-			}
-			while(o ==((orientation+2)%5));
+
 			move(environnement,o);
 	}
 
