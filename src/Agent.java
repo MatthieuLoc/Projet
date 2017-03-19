@@ -33,6 +33,7 @@ public abstract class Agent {
 		this.state=0;
 		this.energy=Glob.maxEnergy;
 		this.alive=false;
+		System.out.println("mort");
 	}
 	
 	public void climb(int[][] environnement,int[][] terrain){

@@ -43,7 +43,7 @@ public class Animaux {
 	
 	public void moveRand( int[][] environnement,int[][] terrain){
 		for(int i=0;i<taille;i++){
-			if(animaux[i].alive=true){
+			if(animaux[i].alive==true){
 				animaux[i].moveRand(environnement);
 				animaux[i].climb(environnement,terrain);
 			}
@@ -53,11 +53,15 @@ public class Animaux {
 	public void loupMange(){
 		for(int l=Glob.nmoutons;l<taille;l++){
 			for(int m=0;m<Glob.nmoutons;m++){
-				if((animaux[l].x==animaux[m].x)&&(animaux[l].y==animaux[m].y)){
-					System.out.println("mangé");
-					animaux[l].nourri();
-					animaux[m].meurs();
-				}
+				if(animaux[m].alive==true){
+					if((animaux[l].x==animaux[m].x)&&(animaux[l].y==animaux[m].y)){
+						System.out.println("mangé");
+						System.out.println(animaux[l].x+" = "+animaux[m].x);
+						System.out.println(animaux[l].y+" = "+animaux[m].y);
+						animaux[l].nourri();
+						animaux[m].meurs();
+					}
+			}
 			}
 			
 		}
@@ -92,7 +96,9 @@ public class Animaux {
 	
 	public void lowerEnergy(){
 		for(int i=0;i<taille;i++){
-			animaux[i].lowerEnergy();
+			if(animaux[i].alive==true){
+				animaux[i].lowerEnergy();
+			}
 		}
 	}
 	
