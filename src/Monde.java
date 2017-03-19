@@ -30,13 +30,13 @@ public class Monde {
 		sprite=new Sprite(terrain,animaux);
 		
 		for(;;){
-			animaux.step(terrain.getEnvironnement());
+			animaux.step(terrain.getEnvironnement(),terrain.getTerrain());
 			
 			sprite.refresh();
 			//System.out.println(animaux.toString3());
 			
 			try {
-			    Thread.sleep(10);                 //1000 milliseconds is one second.
+			    Thread.sleep(300);                 //1000 milliseconds is one second.
 			} catch(InterruptedException ex) {
 			    Thread.currentThread().interrupt();
 			}

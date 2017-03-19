@@ -134,11 +134,11 @@ public class Sprite extends JPanel {
 				}
 				//moutons=2 (voir getmatrice animaux)
 				if(animaux.getMatrice()[i][j]==2){
-					g4.drawImage(mouton,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g4.drawImage(loup,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				//loups=3 (voir getmatrice animaux)
 				if(animaux.getMatrice()[i][j]==3){
-					g4.drawImage(loup,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+					g4.drawImage(mouton,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				}
 				if(animaux.getMatrice()[i][j]==5){
 					g4.drawImage(moutonLoup,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);

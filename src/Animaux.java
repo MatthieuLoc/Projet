@@ -38,13 +38,15 @@ public class Animaux {
 		}
 	}
 	
+
 	
 	
-	public void moveRand( int[][] environnement){
+	public void moveRand( int[][] environnement,int[][] terrain){
 		for(int i=0;i<taille;i++){
-			//matrice[animaux[i].x][animaux[i].y]=0;
-			animaux[i].moveRand(environnement);
-			//matrice[animaux[i].x][animaux[i].y]=2;
+			if(animaux[i].alive=true){
+				animaux[i].moveRand(environnement);
+				animaux[i].climb(environnement,terrain);
+			}
 		}
 	}
 	
@@ -52,6 +54,7 @@ public class Animaux {
 		for(int l=Glob.nmoutons;l<taille;l++){
 			for(int m=0;m<Glob.nmoutons;m++){
 				if((animaux[l].x==animaux[m].x)&&(animaux[l].y==animaux[m].y)){
+					System.out.println("mangé");
 					animaux[l].nourri();
 					animaux[m].meurs();
 				}
@@ -60,12 +63,16 @@ public class Animaux {
 		}
 	}
 	
-	public void step(int[][] environnement){
+	public void step(int[][] environnement,int[][] terrain){
 		this.loupMange();
-		this.moveRand(environnement);
+		this.lowerEnergy();
+		this.moveRand(environnement,terrain);
+
+		
 		
 		
 	}
+	
 	public int[][] getMatrice(){
 		this.cleanMatrice();
 		for(int i=0;i<taille;i++){
@@ -82,6 +89,13 @@ public class Animaux {
 
 		return matrice;
 	}
+	
+	public void lowerEnergy(){
+		for(int i=0;i<taille;i++){
+			animaux[i].lowerEnergy();
+		}
+	}
+	
 	public void cleanMatrice(){
 		for(int j= 0;j<Glob.size_y;j++){
 			for(int i=0;i<Glob.size_x;i++){
