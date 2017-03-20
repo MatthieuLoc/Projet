@@ -27,10 +27,11 @@ public class Monde {
 		
 
 		
-		sprite=new Sprite(terrain,animaux);
+		sprite= new Sprite(terrain,animaux);
 		
 		for(;;){
 			animaux.step(terrain.getEnvironnement(),terrain.getTerrain());
+			terrain.refreshArbres();
 			
 			sprite.refresh();
 			//System.out.println(animaux.toString3());

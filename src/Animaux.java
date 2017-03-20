@@ -26,7 +26,7 @@ public class Animaux {
 				x=(int)(Math.random()*Glob.size_x);
 				y=(int)(Math.random()*Glob.size_y);
 			}
-			while(environnement[x][y]==30||environnement[x][y]==31);
+			while(environnement[x][y]==40||environnement[x][y]==41);
 			
 			
 			if(i<Glob.nmoutons){
@@ -38,30 +38,24 @@ public class Animaux {
 		}
 	}
 	
-
 	
 	
-	public void moveRand( int[][] environnement,int[][] terrain){
+	public void moveRand( int[][] environnement, int[][] terrain){
 		for(int i=0;i<taille;i++){
-			if(animaux[i].alive==true){
-				animaux[i].moveRand(environnement);
-				animaux[i].climb(environnement,terrain);
-			}
+			//matrice[animaux[i].x][animaux[i].y]=0;
+			animaux[i].moveRand(environnement);
+			animaux[i].climb(terrain);
+			//matrice[animaux[i].x][animaux[i].y]=2;
 		}
 	}
 	
 	public void loupMange(){
 		for(int l=Glob.nmoutons;l<taille;l++){
 			for(int m=0;m<Glob.nmoutons;m++){
-				if(animaux[m].alive==true){
-					if((animaux[l].x==animaux[m].x)&&(animaux[l].y==animaux[m].y)){
-						System.out.println("mangé");
-						System.out.println(animaux[l].x+" = "+animaux[m].x);
-						System.out.println(animaux[l].y+" = "+animaux[m].y);
-						animaux[l].nourri();
-						animaux[m].meurs();
-					}
-			}
+				if((animaux[l].x==animaux[m].x)&&(animaux[l].y==animaux[m].y)){
+					animaux[l].nourri();
+					animaux[m].meurs();
+				}
 			}
 			
 		}
@@ -69,14 +63,11 @@ public class Animaux {
 	
 	public void step(int[][] environnement,int[][] terrain){
 		this.loupMange();
-		this.lowerEnergy();
 		this.moveRand(environnement,terrain);
-
 		
 		
 		
 	}
-	
 	public int[][] getMatrice(){
 		this.cleanMatrice();
 		for(int i=0;i<taille;i++){
@@ -93,15 +84,6 @@ public class Animaux {
 
 		return matrice;
 	}
-	
-	public void lowerEnergy(){
-		for(int i=0;i<taille;i++){
-			if(animaux[i].alive==true){
-				animaux[i].lowerEnergy();
-			}
-		}
-	}
-	
 	public void cleanMatrice(){
 		for(int j= 0;j<Glob.size_y;j++){
 			for(int i=0;i<Glob.size_x;i++){

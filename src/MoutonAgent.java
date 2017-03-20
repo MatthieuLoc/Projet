@@ -12,25 +12,28 @@
 
 	
 public class MoutonAgent extends Agent {
-
-
 	
+	//constructeur
 	public MoutonAgent(int x, int y){
-	super( x, y,false);
+	super( x, y,false); //constructeur de la classe agent, avec mechant==false;
 	}
 	
+	//redonne de l'energie
+	public void nourri(){
+		
+		state=0;//arrete de chasser fuire
+		energy=(energy+Glob.eatEnergyM);
+	}
 	
-
-	
-
+	//diminue energie a chquae iteration
 	public  void lowerEnergy(){
-			this.energy=this.energy-5;
-			if(this.energy<0){
-				this.alive=false;
+		
+			energy=energy-Glob.itEnergyM;
+			
+			if(energy<0){
+				meurs();
 			}
+		}
 	}
-
-
-}
 
 
